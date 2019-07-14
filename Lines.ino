@@ -44,3 +44,18 @@ void LineForCross(int power) // really? I have nothing to explain in this case
     }
   }
 }
+
+void LineForAnyCross(int power) // really? I have nothing to explain in this case
+{
+  preset();
+  setArgs(2, 4);
+  while(1)
+  {
+    PDAction(power);
+    if(s[0] < 30 || s[3] < 30) // this is cross condition
+    {
+      HoldBoth(posB, posC);
+      break;
+    }
+  }
+}

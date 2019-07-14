@@ -1,5 +1,5 @@
-int s[5], maxi[5] = {600, 600, 600, 600, 600 }, 
-		  mini[5] = {300, 300, 300, 300, 300 };
+int s[5], maxi[5] = {750, 750, 750, 750, 750 }, 
+		  mini[5] = {30, 30, 30, 30, 30 };
 
 volatile int posB = 0; //encoderB
 volatile int posC = 0; //encoderC
@@ -7,7 +7,7 @@ volatile int posC = 0; //encoderC
 void setup()
 {
   first_init();
-  
+  LineForAnyCross(150);
 }
 
 void loop()
