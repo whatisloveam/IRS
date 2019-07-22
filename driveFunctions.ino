@@ -8,7 +8,6 @@ void preset()
   posB = 0;
   posC = 0;  
 }
-
 void MoveForEnc(int power, int enc)
 {
 	preset();
@@ -21,6 +20,23 @@ void MoveForEnc(int power, int enc)
 	}
 	if(power > 0) HoldBoth(enc, enc);
 	else HoldBoth(-enc, -enc);
+}
+
+void MoveForEnc(int power, int enc, bool isStopped)
+{
+  preset();
+  
+  while(abs((posB+posC)/2) < enc)
+  {
+    u = 3*(posC - posB);
+    motorB(power + u);
+    motorC(power - u);
+  }
+  if(isStopped)
+  {
+    if(power > 0) HoldBoth(enc, enc);
+    else HoldBoth(-enc, -enc);
+  }
 }
 
 
@@ -66,7 +82,25 @@ void TurnAround(int power, int enc)
 		u = 3*(posC + posB);
 		motorB(power - u);
 		motorC(-power - u);
+    delay(10);
 	}
 	if(power > 0) HoldBoth(enc, -enc);
 	else HoldBoth(-enc, enc);
+}
+
+void TurnAroundSens(int power)
+{
+  preset();
+  
+  while(true)
+  {
+    UpdSen();
+    u = 3*(posC + posB);
+    motorB(power - u);
+    motorC(-power - u);
+
+    if(s[4] < 55) break;
+    delay(10);
+  }
+  HoldBoth(posB, posC);
 }

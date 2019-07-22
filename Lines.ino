@@ -59,3 +59,19 @@ void LineForAnyCross(int power) // really? I have nothing to explain in this cas
     }
   }
 }
+
+void LineForEnc(int power, int enc, bool isStopped)
+{
+  LineForEnc(power, enc);
+  if(isStopped)HoldBoth(posB,posC);
+}
+
+void LineForEnc(int power, int enc)
+{
+  preset();
+  while((posB + posC)/2 < enc) 
+  {
+    PDAction(power);
+  }
+  stopMotors();
+}
